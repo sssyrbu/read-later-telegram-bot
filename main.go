@@ -3,13 +3,17 @@ package main
 import (
     "log"
     "github.com/sssyrbu/save-links-telegram-bot/config"
+    "github.com/sssyrbu/save-links-telegram-bot/storage"
     "github.com/sssyrbu/save-links-telegram-bot/verify"
     tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
 
 
 func main() {
-    botApiToken := config.LoadConfig().Token
+    configs := config.LoadConfig()
+    botApiToken := configs.Token
+    redisClient := storage.LoadRedisClient()
+
     bot, err := tgbotapi.NewBotAPI(botApiToken)
     if err != nil {
         log.Fatalf("Failed to create bot: %v", err)    

@@ -9,6 +9,8 @@ import (
 
 type Config struct {
     Token string
+    Addr string
+    Port string
 }
 
 func LoadConfig() *Config {
@@ -18,5 +20,9 @@ func LoadConfig() *Config {
         log.Fatalf("Error loading .env file")
     }
 
-    return &Config{Token: os.Getenv("BOT_API_KEY")}
+    return &Config{
+        Token: os.Getenv("BOT_API_KEY"),
+        Addr: os.Getenv("REDIS_ADDR"),
+        Port: os.Getenv("REDIS_PORT"),
+    }
 }
