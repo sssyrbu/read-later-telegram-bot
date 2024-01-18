@@ -1,33 +1,28 @@
 // Database manipulations logic
 package storage
 
-import ( 
-    "github.com/go-redis/redis" 
-    "github.com/sssyrbu/save-links-telegram-bot/config"
+import (
+	"github.com/go-redis/redis"
+	"github.com/sssyrbu/save-links-telegram-bot/config"
 )
 
-
 func LoadRedisClient() *redis.Client {
-    config_addr := config.LoadConfig().Addr 
-    config_port := config.LoadConfig().Port
+	config_addr := config.LoadConfig().Addr
 
-    redisClient := redis.NewClient(&redis.Options{ 
-        Addr: config_addr + config_port, 
-        Password: "", 
-        DB: 0, 
-    })
+	redisClient := redis.NewClient(&redis.Options{
+		Addr:     config_addr,
+		Password: "",
+		DB:       0,
+	})
 
-    return redisClient
+	return redisClient
 }
 
-
-func InsertArticle(client *redis.Client, key, value string) any {
-    result, err := client.SAdd(key, value).Result()
-
-    if err != nil {
-        return err
-    }
-
-    return result
+func InsertArticle(client *redis.Client, key, value string) (int, error) {
+	result, err := client.SAdd(key, value).Result()
+	if err != nil {
+		return 0, err
+	}
+	return int(result), nil
 
 }

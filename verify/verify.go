@@ -1,19 +1,19 @@
 package verify
 
 import (
-    "net/http"
+	"net/http"
 )
 
 func VerifyLink(link string) bool {
-    res, err := http.Get(link)
-    if err != nil {
-        return false
-    }
+	res, err := http.Get(link)
+	if err != nil {
+		return false
+	}
 
-    if (res.StatusCode != 200) {
-        return false
-    }
+	if res.StatusCode != 200 {
+		return false
+	}
 
-    return true
+	return true
 
 }
