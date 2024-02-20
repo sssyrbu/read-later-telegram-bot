@@ -36,8 +36,24 @@ func main() {
 		// Checking if message is a start command
 		switch update.Message.Command() {
 		case "start":
-			msg.Text = "hi there! send me an article and I will save it to my local db. I will be randomly sending you an article every day."
+			msg.Text = "first message output"
 			msg.ReplyToMessageID = update.Message.MessageID
+		// Command to view articles that user previously saved
+		case "view_articles":
+			fmt.Println("we are in the view articles section")
+			userArticles, err := storage.UserArticles(redisClient, strconv.FormatInt(update.Message.Chat.ID, 10))
+			if err != nil {
+				fmt.Println("an error occured:", err)
+				return
+			}
+			msg.Text = "Your saved articles: \n"
+			for index, article := range userArticles {
+				formattedArticle := fmt.Sprintf("%d. %s \n", index+1, article)
+				msg.Text += formattedArticle
+			}
+			// msg.ReplyToMessageID = update.Message.MessageID
+		case "dojka":
+			msg.Text = "Я люблю Аню 🩷"
 		default:
 			// Checking if url that was sent by user is valid
 			sentUrl := verify.VerifyLink(update.Message.Text)

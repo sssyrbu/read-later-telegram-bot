@@ -24,5 +24,12 @@ func InsertArticle(client *redis.Client, key, value string) (int, error) {
 		return 0, err
 	}
 	return int(result), nil
+}
 
+func UserArticles(client *redis.Client, key string) ([]string, error) {
+	result, err := client.SMembers(key).Result()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
