@@ -4,9 +4,11 @@ import (
 	"fmt"
 	"log"
 	"strconv"
+	"time"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"github.com/sssyrbu/save-links-telegram-bot/config"
+	"github.com/sssyrbu/save-links-telegram-bot/sendarticles"
 	"github.com/sssyrbu/save-links-telegram-bot/storage"
 	"github.com/sssyrbu/save-links-telegram-bot/verify"
 )
@@ -28,6 +30,14 @@ func main() {
 	updateConfig.Timeout = 30
 	updates := bot.GetUpdatesChan(updateConfig)
 
+	// Sending an article once in 24 hours
+	dailyTicker := time.NewTicker(24 * time.Hour)
+	go func() {
+		for range dailyTicker.C {
+			sendarticles.SendArticles(bot, redisClient)
+		}
+	}()
+
 	for update := range updates {
 		if update.Message == nil {
 			continue
@@ -36,7 +46,7 @@ func main() {
 		// Checking if message is a start command
 		switch update.Message.Command() {
 		case "start":
-			msg.Text = "first message output"
+			msg.Text = "Hi! Send me an article (url) and I will remind you to read it later."
 			msg.ReplyToMessageID = update.Message.MessageID
 		// Command to view articles that user previously saved
 		case "view_articles":
@@ -50,18 +60,17 @@ func main() {
 				formattedArticle := fmt.Sprintf("%d. %s \n", index+1, article)
 				msg.Text += formattedArticle
 			}
-			// msg.ReplyToMessageID = update.Message.MessageID
 		default:
 			// Checking if url that was sent by user is valid
 			sentUrl := verify.VerifyLink(update.Message.Text)
 			if sentUrl {
 				_, err := storage.InsertArticle(redisClient, strconv.FormatInt(update.Message.Chat.ID, 10), update.Message.Text)
 				if err != nil {
-					fmt.Println("An error occured while executing defaul case:", err)
+					log.Printf("An error occured while executing defaul case: %v", err)
 				}
-				msg.Text = "valid link"
+				msg.Text = "Article was saved!"
 			} else {
-				msg.Text = "invalid link"
+				msg.Text = "The link you provided is invalid."
 			}
 		}
 

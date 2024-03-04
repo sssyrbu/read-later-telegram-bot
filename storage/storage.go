@@ -33,3 +33,11 @@ func UserArticles(client *redis.Client, key string) ([]string, error) {
 	}
 	return result, nil
 }
+
+func LoadUserIDs(client *redis.Client) ([]string, error) {
+	keys, err := client.Keys("*").Result()
+	if err != nil {
+		return nil, err
+	}
+	return keys, nil
+}
