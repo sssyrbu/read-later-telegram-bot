@@ -40,10 +40,9 @@ func main() {
 			msg.ReplyToMessageID = update.Message.MessageID
 		// Command to view articles that user previously saved
 		case "view_articles":
-			fmt.Println("we are in the view articles section")
 			userArticles, err := storage.UserArticles(redisClient, strconv.FormatInt(update.Message.Chat.ID, 10))
 			if err != nil {
-				fmt.Println("an error occured:", err)
+				fmt.Println("An error occured while executing 'view_articles' command:", err)
 				return
 			}
 			msg.Text = "Your saved articles: \n"
@@ -52,17 +51,13 @@ func main() {
 				msg.Text += formattedArticle
 			}
 			// msg.ReplyToMessageID = update.Message.MessageID
-		case "dojka":
-			msg.Text = "Я люблю Аню 🩷"
 		default:
 			// Checking if url that was sent by user is valid
 			sentUrl := verify.VerifyLink(update.Message.Text)
 			if sentUrl {
-				result, err := storage.InsertArticle(redisClient, strconv.FormatInt(update.Message.Chat.ID, 10), update.Message.Text)
+				_, err := storage.InsertArticle(redisClient, strconv.FormatInt(update.Message.Chat.ID, 10), update.Message.Text)
 				if err != nil {
-					fmt.Println("an error occured:", err)
-				} else {
-					fmt.Println("success result:", result)
+					fmt.Println("An error occured while executing defaul case:", err)
 				}
 				msg.Text = "valid link"
 			} else {

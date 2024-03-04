@@ -1,3 +1,4 @@
+// Link verification logic
 package verify
 
 import (
