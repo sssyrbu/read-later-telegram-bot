@@ -1,4 +1,4 @@
-module github.com/sssyrbu/save-links-telegram-bot
+module github.com/sssyrbu/read-later-telegram-bot
 
 go 1.21.6
 
