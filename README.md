@@ -1,1 +1,2 @@
-# save-links-telegram-bot
+# "Read Later" bot for Telegram
+### readme coming soon
