@@ -7,10 +7,10 @@ import (
 	"time"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
-	"github.com/sssyrbu/save-links-telegram-bot/config"
-	"github.com/sssyrbu/save-links-telegram-bot/sendarticles"
-	"github.com/sssyrbu/save-links-telegram-bot/storage"
-	"github.com/sssyrbu/save-links-telegram-bot/verify"
+	"github.com/sssyrbu/read-later-telegram-bot/config"
+	"github.com/sssyrbu/read-later-telegram-bot/sendarticles"
+	"github.com/sssyrbu/read-later-telegram-bot/storage"
+	"github.com/sssyrbu/read-later-telegram-bot/verify"
 )
 
 func main() {

@@ -3,7 +3,7 @@ package storage
 
 import (
 	"github.com/go-redis/redis"
-	"github.com/sssyrbu/save-links-telegram-bot/config"
+	"github.com/sssyrbu/read-later-telegram-bot/config"
 )
 
 func LoadRedisClient() *redis.Client {

@@ -8,7 +8,7 @@ import (
 
 	"github.com/go-redis/redis"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
-	"github.com/sssyrbu/save-links-telegram-bot/storage"
+	"github.com/sssyrbu/read-later-telegram-bot/storage"
 )
 
 func SendArticles(bot *tgbotapi.BotAPI, redisClient *redis.Client) {
