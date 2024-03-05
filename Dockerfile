@@ -2,7 +2,7 @@ FROM golang:1.21.6-alpine
 
 WORKDIR /bot
 
-RUN apk --update
+RUN apk update
 
 COPY ./ ./
 
