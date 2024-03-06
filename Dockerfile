@@ -1,11 +1,11 @@
-FROM golang:1.21.6-alpine
+FROM golang:1.22-bookworm
 
 WORKDIR /bot
 
-RUN apk update
+RUN apt update && apt install redis-server -y
 
 COPY ./ ./
-
+RUN redis-server --daemonize yes 
 RUN go mod download && go build main.go
 
 CMD ["./main"]
