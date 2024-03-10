@@ -26,4 +26,5 @@ docker-compose up --build
 docker-compose up -d
 ```
 
-### Usage screenshots:
+### Usage screenshot:
+![image](https://github.com/sssyrbu/read-later-telegram-bot/assets/68150627/01a0f981-0487-4531-90df-87831ee2403e)
