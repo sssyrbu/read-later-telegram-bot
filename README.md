@@ -12,15 +12,18 @@ https://t.me/articles_saving_bot
 ### Installation
 Follow these steps to install and run the bot
 1. Clone the repository:
-   
-``` git clone https://github.com/sssyrbu/read-later-telegram-bot ```
-``` cd read-later-telegram-bot ```
+```
+   git clone https://github.com/sssyrbu/read-later-telegram-bot
+   cd read-later-telegram-bot
+```
 3. Rename the .env.example file to .env and paste your token there.
 4. Compose the project using Docker Compose:
-
-``` docker-compose up --build ```
+``` 
+docker-compose up --build
+```
 5. Run the bot in detached mode:
-
-``` docker-compose up -d ```
+```
+docker-compose up -d
+```
 
 ### Usage screenshots:
