@@ -6,6 +6,6 @@ COPY . .
 
 RUN go mod download
 
-RUN go build main.go
+RUN GOOS=linux go build -o main .
 
 ENTRYPOINT ["./main"]
