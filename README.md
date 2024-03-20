@@ -1,30 +1,13 @@
-# Telegram Bot: Article Saver and Reminder
-This is a Telegram bot written in Golang that can save articles and remind you to read a random article from your saved articles every 12 hours.
+# Телеграм-бот для сохранения ссылок на статьи, который напоминает их прочитать
+Это телеграм-бот, написанный на Go, который может сохранять статьи и напоминать вам прочитать случайную статью из сохраненных каждые 24 часа.
 
-### Features
-Save articles: The bot allows you to save articles for later reading.
-View your articles: Use command "/view_articles" to view the list of your saved articles.
-Reminder: The bot will send you a reminder to read a random article every 12 hours.
+### Особенности:
+Сохранение статей: бот позволяет сохранять статьи, которые пользователь захочет позже прочитать. Статья - валидная ссылка.
+Просмотр ваших статей: используйте команду "/view_articles", чтобы посмотреть список ваших сохраненных статей.
+Напоминание: бот будет отправлять вам напоминание прочитать случайную статью каждые 24 часа.
 
-### You can use my bot here:
-https://t.me/articles_saving_bot
+### Стек:
+В проекте я использовал Go, SQLite3 и Docker для сборки.
 
-### Installation
-Follow these steps to install and run the bot
-1. Clone the repository:
-```
-   git clone https://github.com/sssyrbu/read-later-telegram-bot
-   cd read-later-telegram-bot
-```
-3. Rename the .env.example file to .env and paste your token there.
-4. Compose the project using Docker Compose:
-``` 
-docker-compose up --build
-```
-5. Run the bot in detached mode:
-```
-docker-compose up -d
-```
-
-### Usage screenshot:
+### Пример использования:
 ![image](https://github.com/sssyrbu/read-later-telegram-bot/assets/68150627/01a0f981-0487-4531-90df-87831ee2403e)
